@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>شب چهارشنبه، ۱۳ آبان</title>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6ecdb;--card:#fff7e8;--ink:#2f2a38;--muted:#6d6275;--line:#d8c3a2;--rose:#b3262e;--btn:#2f2a38;--btnt:#fff7e8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141826;--card:#1d2236;--ink:#f4e8d4;--muted:#b8aec2;--line:#34395a;--rose:#e0525a;--btn:#f4e8d4;--btnt:#141826;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141826;--card:#1d2236;--ink:#f4e8d4;--muted:#b8aec2;--line:#34395a;--rose:#e0525a;--btn:#f4e8d4;--btnt:#141826;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.9 Vazirmatn,Tahoma,"Segoe UI",sans-serif}
+main{max-width:440px;margin:0 auto;padding:40px 18px 56px}
+h1{font:400 2.6rem/1.3 Lalezar,Vazirmatn,Tahoma,sans-serif;margin:0 0 6px}
+.lead{margin:0 0 28px;color:var(--muted)}
+.card{background:var(--card) radial-gradient(220px 140px at 50% 0,rgba(230,184,122,.22),transparent) no-repeat;border:1.5px solid var(--line);border-radius:20px;padding:28px 22px 26px;min-height:300px;text-align:center}
+.card.in{animation:up .5s ease both}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#ico{font-size:3.4rem;line-height:1.3}
+h2{font:400 1.7rem/1.4 Lalezar,Vazirmatn,Tahoma,sans-serif;margin:6px 0 10px}
+#p{margin:0;white-space:pre-line}
+.track{position:relative;height:4px;background:var(--line);border-radius:4px;margin:44px 6px 8px}
+.fill{position:absolute;top:0;right:0;height:100%;background:var(--rose);border-radius:4px;transition:width .6s ease}
+.rose{position:absolute;top:-22px;transform:translateX(50%);font-size:1.4rem;transition:right .6s ease}
+#step{margin:0;text-align:center;color:var(--muted);font-size:.9rem}
+.nav{display:flex;gap:10px;justify-content:center;margin-top:22px}
+button{font:700 1rem Vazirmatn,Tahoma,sans-serif;border-radius:999px;padding:10px 28px;border:1.5px solid var(--btn);cursor:pointer}
+#next{background:var(--btn);color:var(--btnt)}
+#prev{background:transparent;color:var(--ink)}
+button:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.card.in{animation:none}.fill,.rose{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>شب چهارشنبه، ۱۳ آبان</h1>
+<p class="lead">یه قدم‌زدن ساده که یادم می‌مونه.</p>
+<section class="card" id="card" aria-live="polite"><div id="ico"></div><h2 id="t"></h2><p id="p"></p></section>
+<div class="track" aria-hidden="true"><div class="fill" id="fill"></div><div class="rose" id="rose">🌹</div></div>
+<p id="step"></p>
+<div class="nav"><button id="prev">قبلی</button><button id="next">ادامه</button></div>
+</main>
+<script>
+var S=[
+["🌙","زنگ زدی","گفتی بیا یه قدم بزنیم.\nدلم لرزید، ولی فقط گفتم: الان میام."],
+["🌹","یه شاخه رز قرمز","سر راه یه شاخه رز قرمز خریدم.\nکوچیک بود، ولی همه‌ی حرفم رو داشت."],
+["🚶","قدم زدیم","کوچه‌ها آروم بود.\nراه رفتیم و لازم نبود زیاد حرف بزنیم."],
+["☕","کافه‌ی همیشگی، ته کوچه","همون‌جا نشستیم.\nمن فقط می‌خواستم بفهمم تو دلت چی می‌گذره."],
+["🤍","شنیدم","وقتی از دلت گفتی، فهمیدم بعضی چیزا رو خودت تنها کشیدی.\nنه قضاوتت کردم، نه عجله داشتم."],
+["🌅","برگشتیم، آروم","رابطه فقط کافه و خوش‌گذرونی نیست؛ تو غم، تو شادی، تو گریه، کنار همیم.\nو الان اولویت، حال خودته. هیچ عجله‌ای نیست. آخرش بهت گفتم: «خدا الکی هیچ‌کس رو به هم نمی‌رسونه.»\n\nاین صفحه فقط مال توئه."]
+];
+var i=0,$=function(x){return document.getElementById(x)};
+function fa(n){return n.toLocaleString("fa-IR")}
+function show(){
+  var s=S[i],c=$("card"),pct=i/(S.length-1)*100;
+  $("ico").textContent=s[0];$("t").textContent=s[1];$("p").textContent=s[2];
+  $("fill").style.width=pct+"%";$("rose").style.right=pct+"%";
+  $("step").textContent=fa(i+1)+" از "+fa(S.length);
+  $("next").textContent=i===S.length-1?"از اول":"ادامه";
+  $("prev").hidden=i===0;
+  c.classList.remove("in");void c.offsetWidth;c.classList.add("in");
+}
+$("next").onclick=function(){i=i===S.length-1?0:i+1;show()};
+$("prev").onclick=function(){if(i>0){i--;show()}};
+show();
+</script>
+</body>
+</html>
